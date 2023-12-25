@@ -9,32 +9,29 @@ const base_URL = "https://image.tmdb.org/t/p/original/";
 
 // Row component
 function Row({ title, fetchURL, isLargeRow }) {
-  /* Creating a movie state (short term memory) */
   const [movies, setMovies] = useState([]);
-  /* Creating a trailer state (short term memory) */
   const [trailerURL, setTrailerURL] = useState("");
-  //   Pulling information from tmdb API when the pages loads
+
   useEffect(() => {
-    //   Running async call
     async function fetchData() {
       // Waiting for the promise to come back with movie results, fetchURL(outside the code block)
       const request = await axios.get(fetchURL);
       setMovies(request.data.results);
       return request;
     }
-    // if [empty], run once when the row loads, and dont run again
     fetchData();
   }, [fetchURL]);
-  //   console.log(movies);
 
   const opts = {
     height: "390",
     width: "100%",
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
+      // setting autoplay to 1 will start playing the video automatically
       autoplay: 1,
     },
   };
+
+  console.log('trailerURL',trailerURL)
 
   //   When user clicks on the movie picture
   const handleClick = (movie) => {
@@ -45,7 +42,6 @@ function Row({ title, fetchURL, isLargeRow }) {
       // Search for movie trailer full url
       movieTrailer(movie?.name || "")
         .then((url) => {
-          // https://www.youtube.com/watch?v=aSØDÆømlsdæ
           const urlParams = new URLSearchParams(new URL(url).search); // urlParams gives us everthing after the ?
           setTrailerURL(urlParams.get("v")); //urlParams gives us everything after v=
           // Displays error message if unable to find url
@@ -80,11 +76,9 @@ function Row({ title, fetchURL, isLargeRow }) {
         ))}
         {/* Contain -> posters */}
       </div>
-      {/* Embedding youtube movie trailers to show */}
       {trailerURL && <YouTube videoId={trailerURL} opts={opts} />}
     </div>
   );
 }
 
-// Exporting Row function. Making it available
 export default Row;

@@ -13,5 +13,4 @@ const request = {
   fetchDocumentaries: `/discover/movie?api_key=${API_KEY}&with_genres=99`,
 };
 
-// Exporting request object. Making it available
 export default request;

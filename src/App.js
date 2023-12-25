@@ -17,7 +17,6 @@ function App() {
         fetchURL={requests.fetchNetflixOriginals}
         isLargeRow={true}
       />
-      {/* isLargeRow made up param -> row__posterLarge */}
       <Row title="Trending Now" fetchURL={requests.fetchTrending} />
       <Row title="Top Rated" fetchURL={requests.fetchTopRated} />
       <Row title="Action Movies" fetchURL={requests.fetchActionMovies} />

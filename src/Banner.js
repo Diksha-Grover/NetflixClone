@@ -3,7 +3,6 @@ import axios from "./axios";
 import requests from "./requests";
 
 function Banner() {
-  // Setting up useState
   const [movie, setMovie] = useState([]);
 
   //   useEffect (short term memory)
@@ -16,19 +15,17 @@ function Banner() {
         ]
       );
     }
-    // Pulling data from API
     fetchData();
   }, []);
 
-  //   console.log(movie);
+    console.log(movie,'movie');
 
-  // Showing less movie info (plot)
+  // Showing less movie info
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   }
 
   return (
-    //   Contents of header
     <header
       className="banner"
       style={{
